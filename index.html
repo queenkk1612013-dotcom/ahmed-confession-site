@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f8fc">
+  <title>A little secret for Ahmed</title>
+  <style>
+    :root {
+      --ink: #202235;
+      --muted: #73758b;
+      --paper: #ffffff;
+      --line: #e9eaf2;
+      --accent: #7867d9;
+      --accent-dark: #5e4fc0;
+      --soft: #f0edff;
+      --green: #eaf8f0;
+      --green-ink: #246b48;
+      --shadow: 0 24px 70px rgba(38, 35, 76, .10);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 15% 12%, rgba(205, 198, 255, .36), transparent 30%),
+        radial-gradient(circle at 88% 86%, rgba(255, 216, 231, .35), transparent 28%),
+        #f7f8fc;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    .shell { width: min(100%, 540px); }
+    .topline {
+      display: flex; align-items: center; justify-content: center; gap: 9px;
+      margin-bottom: 18px; color: var(--muted); font-size: 12px;
+      letter-spacing: .16em; text-transform: uppercase; font-weight: 700;
+    }
+    .spark { color: var(--accent); font-size: 17px; }
+    .card {
+      background: rgba(255,255,255,.92);
+      border: 1px solid rgba(232,232,244,.95);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      padding: clamp(25px, 7vw, 44px);
+      text-align: center;
+      overflow: hidden;
+    }
+    .icon-wrap {
+      width: 76px; height: 76px; margin: 0 auto 24px; display: grid; place-items: center;
+      border-radius: 24px; background: var(--soft); color: var(--accent);
+      font-size: 34px; transform: rotate(-4deg);
+    }
+    .eyebrow { color: var(--accent-dark); font-size: 12px; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
+    h1 { margin: 12px 0 12px; font-size: clamp(30px, 7vw, 43px); line-height: 1.12; letter-spacing: -.045em; }
+    p { color: var(--muted); line-height: 1.7; font-size: 15px; margin: 0 auto 20px; max-width: 390px; }
+    .letter {
+      margin: 25px 0 22px; padding: 23px 20px; border: 1px solid var(--line);
+      border-radius: 20px; background: #fcfcff; text-align: left;
+    }
+    .letter .salutation { font-size: 14px; color: var(--muted); margin-bottom: 12px; }
+    .letter .message { font-size: clamp(20px, 5vw, 25px); line-height: 1.4; letter-spacing: -.025em; font-weight: 750; }
+    .letter .signoff { margin-top: 16px; color: var(--muted); font-size: 13px; }
+    .buttons { display: grid; gap: 10px; margin-top: 20px; }
+    button {
+      border: 0; border-radius: 14px; padding: 14px 18px; width: 100%;
+      font: inherit; font-size: 14px; font-weight: 750; cursor: pointer;
+      transition: transform .16s ease, background .16s ease, box-shadow .16s ease;
+    }
+    button:hover { transform: translateY(-1px); }
+    button:focus-visible { outline: 3px solid #b8afff; outline-offset: 3px; }
+    .primary { background: var(--accent); color: white; box-shadow: 0 8px 20px rgba(120,103,217,.22); }
+    .primary:hover { background: var(--accent-dark); }
+    .secondary { background: #f4f4fa; color: var(--ink); border: 1px solid var(--line); }
+    .secondary:hover { background: #ecebf7; }
+    .answer { margin-top: 17px; padding: 15px; background: var(--green); color: var(--green-ink); border-radius: 14px; font-size: 14px; line-height: 1.6; }
+    .answer.neutral { background: #f5f4ff; color: #5b519d; }
+    .reveal {
+      margin-top: 20px; border-top: 1px solid var(--line); padding-top: 22px;
+    }
+    .name {
+      margin-top: 13px; padding: 18px; border-radius: 17px;
+      background: linear-gradient(135deg, #f1efff, #fff0f6);
+      font-size: 25px; font-weight: 800; letter-spacing: -.03em; overflow-wrap: anywhere;
+    }
+    .footer { text-align: center; color: #9698aa; font-size: 11px; margin: 18px 0 0; }
+    .hidden { display: none !important; }
+    .fade-in { animation: rise .42s ease both; }
+    @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <div class="topline"><span class="spark">✦</span> a tiny secret <span class="spark">✦</span></div>
+    <section class="card" aria-live="polite">
+      <div class="icon-wrap" aria-hidden="true" id="mainIcon">✉</div>
+
+      <section id="intro">
+        <div class="eyebrow">A message for you</div>
+        <h1>Hey, Ahmed.</h1>
+        <p>Someone has something they’ve been wanting to tell you. No pressure — just a little honesty.</p>
+        <button class="primary" id="openLetter">Open your letter <span aria-hidden="true">↗</span></button>
+      </section>
+
+      <section id="confession" class="hidden fade-in">
+        <div class="eyebrow">Okay, here goes…</div>
+        <h1>It's a little scary to say this.</h1>
+        <div class="letter">
+          <div class="salutation">Hey Ahmed,</div>
+          <div class="message">I have a crush on you. ♡</div>
+          <div class="signoff">I just wanted you to know.</div>
+        </div>
+        <p>You don’t have to feel the same way. I just wanted to be honest with you.</p>
+        <div class="eyebrow">How do you feel?</div>
+        <div class="buttons">
+          <button class="primary response" data-answer="same">I like you too ♡</button>
+          <button class="secondary response" data-answer="time">I need some time to think</button>
+          <button class="secondary response" data-answer="thanks">Thank you for telling me</button>
+        </div>
+        <div id="answerMessage" class="answer hidden" role="status"></div>
+        <div class="reveal">
+          <p style="margin-bottom:12px">Want to find out who sent this?</p>
+          <button class="secondary" id="revealName">Reveal the sender ✨</button>
+          <div id="senderName" class="name hidden fade-in"></div>
+          <p id="senderNote" class="hidden" style="font-size:12px; margin-top:12px">A little courage went into sending this. Please be kind. ♡</p>
+        </div>
+      </section>
+    </section>
+    <div class="footer">made with a little courage &amp; a lot of heart</div>
+  </main>
+
+  <script>
+    /*
+      PERSONALIZE THIS BEFORE SHARING:
+      Replace "HER NAME HERE" with your friend's name or nickname.
+      Keep the quotation marks.
+    */
+    const SENDER_NAME = "HER NAME HERE";
+
+    const intro = document.getElementById("intro");
+    const confession = document.getElementById("confession");
+    const openLetter = document.getElementById("openLetter");
+    const mainIcon = document.getElementById("mainIcon");
+    const answerMessage = document.getElementById("answerMessage");
+    const revealName = document.getElementById("revealName");
+    const senderName = document.getElementById("senderName");
+    const senderNote = document.getElementById("senderNote");
+
+    openLetter.addEventListener("click", () => {
+      intro.classList.add("hidden");
+      confession.classList.remove("hidden");
+      confession.classList.add("fade-in");
+      mainIcon.textContent = "♡";
+    });
+
+    const replies = {
+      same: "Aww, that's sweet! ♡ If you want to talk about it, you can message her directly.",
+      time: "That's completely okay. You can take your time and be honest when you're ready. ♡",
+      thanks: "That's okay too. Thanks for being kind and reading the message. ♡"
+    };
+
+    document.querySelectorAll(".response").forEach(button => {
+      button.addEventListener("click", () => {
+        answerMessage.textContent = replies[button.dataset.answer];
+        answerMessage.classList.remove("hidden", "neutral");
+        answerMessage.classList.add("fade-in");
+        if (button.dataset.answer !== "same") answerMessage.classList.add("neutral");
+      });
+    });
+
+    revealName.addEventListener("click", () => {
+      const name = SENDER_NAME.trim();
+      senderName.textContent = name && name !== "HER NAME HERE" ? name : "Your friend's name goes here 💗";
+      senderName.classList.remove("hidden");
+      senderNote.classList.remove("hidden");
+      revealName.textContent = "Sender revealed ♡";
+      revealName.disabled = true;
+      revealName.style.opacity = ".7";
+    });
+  </script>
+</body>
+</html>
